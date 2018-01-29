@@ -1,0 +1,22 @@
+{
+  "name": "csv-saver",
+  "version": "1.0.0",
+  "description": "Create and save CSV files in browser",
+  "main": "dist/index.js",
+  "typings": "dist/main.d.ts",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "save",
+    "csv",
+    "browser"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "rollup": "^0.55.1",
+    "rollup-plugin-typescript2": "^0.10.0",
+    "typescript": "^2.6.2"
+  }
+}

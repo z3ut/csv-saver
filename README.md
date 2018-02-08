@@ -28,6 +28,7 @@ Service default config:
 ```
 {
   delimiter: ',',
-  newLineSequence: '\r\n'
+  newLineSequence: '\r\n',
+  shouldEscapeCharacters: true
 }
 ```

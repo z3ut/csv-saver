@@ -1,18 +1,23 @@
 export interface CsvSaverConfig {
   delimiter?: string;
   newLineSequence?: string;
+  shouldEscapeCharacters?: boolean;
 }
 
 export class CsvSaver {
 
   private delimiter: string;
   private newLineSequence: string;
+  private shouldEscapeCharacters: boolean;
 
   private text: string;
 
-  public constructor({ delimiter = ',', newLineSequence = '\r\n' }: CsvSaverConfig = {}) {
+  public constructor({ delimiter = ',', newLineSequence = '\r\n',
+      shouldEscapeCharacters = true }: CsvSaverConfig = {}) {
     this.delimiter = delimiter;
     this.newLineSequence = newLineSequence;
+    this.shouldEscapeCharacters = shouldEscapeCharacters;
+
     this.text = '';
   }
 
@@ -29,8 +34,25 @@ export class CsvSaver {
     this.addString(this.newLineSequence);
   }
 
+  public addDelimeter() {
+    this.addString(this.delimiter);
+  }
+
+  public addArguments(...objects: any[]) {
+    this.addString(objects.map(obj => {
+      let objectString = String(obj);
+      if (this.shouldEscapeCharacters) {
+        if (objectString.includes(this.delimiter) || objectString.includes(this.newLineSequence)) {
+          objectString = `"${objectString.replace(/"/g, '""')}"`;
+        }
+      }
+      return objectString;
+    }).join(this.delimiter));
+  }
+
   public addArgumentsLine(...objects: any[]) {
-    this.addStringLine(objects.join(this.delimiter));
+    this.addArguments(...objects);
+    this.addNewLine();
   }
 
   public saveAs(fileName: string) {

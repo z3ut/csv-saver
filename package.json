@@ -1,6 +1,6 @@
 {
   "name": "csv-saver",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Create and save CSV files in browser",
   "main": "dist/index.js",
   "typings": "dist/main.d.ts",
